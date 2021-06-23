@@ -8,42 +8,51 @@ import Home from "./Components/Home/Home";
 import Header from "./Components/Header/Header";
 import AboutUs from "./Components/About/AboutUs";
 import Footer from "./Components/Footer/Footer";
-import Details from "./Components/Details/Details"
+import Details from "./Components/Details/Details";
 
 import BasicLayout from "./Components/BookNow/BasicLayout";
 import Form from "./Components/Form/Form";
+import AddProperty from "./Components/AddProperty/AddProperty";
+import Login from "./Components/LoginPage/Login";
+
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Header />
         <div className="content-wrap">
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/booknow">
-            <BookNow />
-          </Route>
-          <Route path="/aboutUs">
-            <AboutUs />
-          </Route>
-          
-          <Route path="/basiclayout/:id">
-            <BasicLayout />
-          </Route>
-          <Route path="/form">
-            <Form />
-          </Route>
-          <Route path="/details">
-            <Details />
-          </Route>
-          <Route path="/payment">
-            <Payment />
-          </Route>
-        </Switch>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/booknow">
+              <BookNow />
+            </Route>
+            <Route path="/aboutUs">
+              <AboutUs />
+            </Route>
+
+            <Route path="/basiclayout/:id">
+              <BasicLayout />
+            </Route>
+            <Route path="/form">
+              <Form />
+            </Route>
+            <Route path="/details">
+              <Details />
+            </Route>
+            <Route path="/payment">
+              <Payment />
+            </Route>
+            <Route path="/AddProperty">
+              <AddProperty />
+            </Route>
+            <Route path="/logIn">
+              <Login />
+            </Route>
+          </Switch>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     );
   }

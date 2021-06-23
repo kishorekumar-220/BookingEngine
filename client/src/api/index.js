@@ -6,7 +6,7 @@ import axios from "axios";
 var env = process.env.NODE_ENV || "production";
 var host =
   env === "development"
-    ? "http://312cdb244ddd.ngrok.io"
+    ? "http://localhost:5000"
     : "http://9a9e6e820483.ngrok.io";
 
 export const getproperty = async () => {
