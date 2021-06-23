@@ -7,13 +7,16 @@ class AddProperty extends Component {
     super(props);
 
     this.state = {
-      ImageFile: Imagecard,
-      hotelName: "",
+      Image: Imagecard,
+      PropertyId: "",
+      name_: "",
+      name: "",
       city: "",
       description: "",
       contact: "",
       address: "",
-      rating: "",
+      ratings: "",
+      website: "",
     };
   }
   handleSubmit = (event) => {
@@ -28,7 +31,7 @@ class AddProperty extends Component {
   };
   handleImage = (e) => {
     this.setState({
-      ImageFile: URL.createObjectURL(e.target.files[0]),
+      Image: URL.createObjectURL(e.target.files[0]),
     });
     console.log("imge func = ", e.target.files);
   };
@@ -58,11 +61,11 @@ class AddProperty extends Component {
                     </label>
                   </div>
                   <div className="imageDiv">
-                    <img src={this.state.ImageFile} className="image"></img>
+                    <img src={this.state.Image} className="image"></img>
                   </div>
                 </div>
               </div>
-              {/* <p>hotel Name = {this.state.hotelName}</p>
+              {/* <p>hotel Name = {this.state.name}</p>
             <p>Address = {this.state.address}</p>
             <p>City = {this.state.city}</p>
             <p>Descriptoin = {this.state.description}</p>
@@ -72,7 +75,7 @@ class AddProperty extends Component {
               <div className="addDetails">
                 <div className="detailsContainer">
                   <input
-                    name="hotelName"
+                    name="name"
                     placeholder="Hotel Name"
                     onChange={this.handleInputChange}
                   ></input>
@@ -130,6 +133,18 @@ class AddProperty extends Component {
               </div>
             </div>
           </form>
+        </div>
+        <div className="sectionTwo">
+          <div className="roomTypeContainer">
+            <div>
+              <form>
+                <input type="text"></input>
+                <input type="text"></input>
+
+                <input type="text"></input>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     );
