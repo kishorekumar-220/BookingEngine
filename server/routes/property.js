@@ -68,6 +68,9 @@ router.post("/addProperty", async (req, res) => {
         website: req.body.website,
         contact: req.body.contact,
         Address: req.body.Address,
+        wifi: req.body.wifi,
+        breakfast: req.body.breakfast,
+        sanitized: req.body.sanitized,
       });
       newProperty.save(function (err, Person) {
         if (err) res.status("400").send(err);
@@ -92,6 +95,9 @@ router.post("/addProperty", async (req, res) => {
             website: req.body.website,
             contact: req.body.contact,
             Address: req.body.Address,
+            wifi: req.body.wifi,
+            breakfast: req.body.breakfast,
+            sanitized: req.body.sanitized,
           });
 
           newProperty.save(function (err, Person) {
