@@ -128,6 +128,7 @@ class DisplayRedux extends Component {
     })
       .then((result) => {
         this.props.roomTypesRate(result.data);
+        console.log("rate API = ", result);
         this.setState({
           listOfAP: result.data,
         });

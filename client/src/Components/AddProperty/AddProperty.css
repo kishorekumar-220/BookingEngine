@@ -15,7 +15,7 @@ h1 {
 .addImages {
   width: 30%;
   margin-left: 2%;
-  margin-top: 1%;
+  margin-top: 4%;
   padding-bottom: 3%;
 }
 /* .addedImage {
@@ -39,8 +39,8 @@ h1 {
   cursor: pointer !important;
 }
 .addImages img {
-  width: 100%;
-  height: 100%;
+  width: 94%;
+  /* height: 51%; */
   margin-top: 5%;
 }
 .image-upload {
@@ -59,16 +59,43 @@ h1 {
   width: 15%;
 }
 #contact {
-  width: 35%;
-  margin-left: 10%;
+  width: 30%;
+  /* margin-left: 10%; */
 }
-#choose,
-.imageDiv {
+#WAcontact {
+  width: 30%;
+}
+#choose {
   margin-left: 3%;
 }
-.setImage input {
+.imageDiv {
+  margin-left: 20%;
+  width: 63% !important;
+  height: 132% !important;
+}
+.insideAddImages {
+  height: 100% !important;
+  display: grid;
+  grid-template-rows: 25% 25% 25% 25%;
+}
+.imageHeight {
+  height: 100% !important;
+}
+.imageHeight input {
+  margin-left: 17%;
+  width: 65%;
+  padding: 2%;
+  padding: 2%;
+  margin-bottom: 1%;
+  margin-top: 2%;
+  border-radius: 12px;
+  border: 1px solid #a2a0a0;
+}
+.setImage input,
+.setroomImage input {
   display: none;
 }
+
 .detailsContainer {
   display: flex;
   flex-direction: column;
@@ -99,12 +126,13 @@ textarea {
   color: grey !important
   ;
 }
-.facilities {
+.facilities1 {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   align-items: stretch;
   margin-top: 2%;
+  margin-left: 8%;
 }
 .ContainerTwo {
   display: flex;
@@ -126,3 +154,64 @@ textarea {
   color: white;
   border: none;
 }
+.inputError {
+  border: 1px solid red !important;
+}
+.noError {
+  border: 1px solid grey;
+}
+.ratingAndContact {
+  margin-left: 8%;
+}
+.ratingAndContact input {
+  padding: 2%;
+  margin-bottom: 1%;
+  margin-right: 3%;
+  margin-top: 2%;
+  border-radius: 12px;
+  border: 1px solid #a2a0a0;
+}
+.ratingAndContact input::placeholder {
+  color: grey !important;
+}
+.F1 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+  /* margin-left: -11%; */
+  width: 100%;
+}
+.F2 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+  /* margin-left: -10%; */
+  width: 100%;
+}
+.F3 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+  /* margin-left: -10%; */
+  width: 100%;
+}
+.F1 input,
+.F2 input,
+.F3 input {
+  margin-right: 5%;
+}
+.F1 label,
+.F2 label,
+.F3 label {
+  width: 100% !important;
+}
+/* Room css */
