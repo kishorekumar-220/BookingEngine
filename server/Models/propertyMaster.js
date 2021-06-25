@@ -58,6 +58,18 @@ const propertyMasterSchema = new mongoose.Schema({
     Address: {
         type: String,
         required: false
+    },
+    wifi: {
+        type: Boolean,
+        required: false
+    },
+    breakfast: {
+        type: Boolean,
+        required: false
+    },
+    sanitized:{
+        type: Boolean,
+        required: false
     }
 })
 
