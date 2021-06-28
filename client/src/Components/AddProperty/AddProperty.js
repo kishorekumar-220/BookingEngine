@@ -39,6 +39,7 @@ const defaultState = {
   pool: false,
   laundry: false,
   beverages: false,
+  pets: false,
 };
 class AddProperty extends Component {
   constructor(props) {
@@ -53,6 +54,8 @@ class AddProperty extends Component {
     let decsErr = "";
     let ratingErr = "";
     let contactError = "";
+    let locationErr = "";
+    let WAcontactError = "";
     // let PropertyIdErr = "";
     if (!this.state.location) {
       locationErr = "Enter Location";
@@ -203,6 +206,12 @@ class AddProperty extends Component {
     });
     console.log("beverages = ", this.state.beverages);
   };
+  handlePets = (e) => {
+    this.setState({
+      pets: !this.state.pets,
+    });
+    console.log("pets = ", this.state.pets);
+  };
   // handleInputChange = (event) => {
   //   this.setState({
   //     [event.target.name]: event.target.value,
@@ -280,6 +289,14 @@ class AddProperty extends Component {
     });
     console.log("imge func = ", e.target.files);
   };
+  handleRating = (e) => {
+    console.log("rating= ", this.state.ratings);
+
+    this.setState({
+      ratings: e.target.value,
+    });
+    console.log("rating= ", this.state.ratings);
+  };
   // handleUpload = () => {};
   render() {
     // console.log("length =", this.props.propertyList.length);
@@ -313,6 +330,7 @@ class AddProperty extends Component {
                 <div className="insideAddImages">
                   <div className="imageHeight">
                     {/* Image URL */}
+                    {/* <AddPhotoAlternateIcon /> */}
                     <input
                       type="url"
                       name="url1"
@@ -323,7 +341,7 @@ class AddProperty extends Component {
                     <div className="imageDiv">
                       <img
                         src={this.state.url1}
-                        alt="Add Image Url"
+                        // alt="Add Image Url"
                         className="image"
                       ></img>
                     </div>
@@ -334,6 +352,7 @@ class AddProperty extends Component {
                       type="url"
                       name="url2"
                       value={this.state.url2}
+                      placeholder="Add Image URL"
                       onChange={this.handleUrl2}
                     ></input>
                     <div className="imageDiv">
@@ -346,6 +365,7 @@ class AddProperty extends Component {
                       type="url"
                       name="url3"
                       value={this.state.url3}
+                      placeholder="Add Image URL"
                       onChange={this.handleUrl3}
                     ></input>
                     <div className="imageDiv">
@@ -358,6 +378,7 @@ class AddProperty extends Component {
                       type="url"
                       name="url4"
                       value={this.state.url4}
+                      placeholder="Add Image URL"
                       onChange={this.handleUrl4}
                     ></input>
                     <div className="imageDiv">
@@ -433,20 +454,20 @@ class AddProperty extends Component {
                     ></textarea>
                   </div>
                   <div className="ratingAndContact">
-                    <input
-                      id="rating"
-                      required
-                      name="ratings"
-                      type="number"
-                      // pattern="\d*"
-                      max="5"
-                      min="1"
-                      placeholder="Rating"
+                    <label htmlFor="option">
+                      {/* rating = {this.state.ratings} */}
+                    </label>
+                    <select
+                      id="option"
+                      value={this.state.ratings}
                       onChange={this.handleRating}
-                      className={`${
-                        this.state.ratingErr !== "" ? "inputError" : ""
-                      }`}
-                    ></input>
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
                     <input
                       id="contact"
                       required
@@ -529,10 +550,10 @@ class AddProperty extends Component {
                         <label>
                           <input
                             type="checkbox"
-                            checked={!this.state.beverages}
-                            onChange={this.handleBeverages}
+                            checked={!this.state.pets}
+                            onChange={this.handlePets}
                           ></input>
-                          Beverages
+                          Pet Allowed
                         </label>
                       </div>
                       <div className="F3">
@@ -566,7 +587,7 @@ class AddProperty extends Component {
                 </div>
 
                 <div className="submit">
-                  <button onClick={this.handleSubmit}>Submit</button>
+                  <button onClick={this.handleSubmit}>Next</button>
                 </div>
               </div>
             </div>

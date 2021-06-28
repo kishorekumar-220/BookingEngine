@@ -9,10 +9,10 @@
   flex-wrap: nowrap;
   margin-top: 5%;
 }
-.setRoomImage {
+.setroomImage {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   /* cursor: pointer; */
 }
 .labelRoom {
@@ -22,11 +22,11 @@
   .imageDivRoom {
     margin-left: 3%;
   } */
-.imageDivRoom img {
+/* .imageDivRoom img {
   width: 100%;
   height: 100%;
   margin-top: 5%;
-}
+} */
 .roomDivide {
   display: flex;
   margin-bottom: 5% !important;
@@ -35,7 +35,7 @@
   /* width: 30%; */
   width: 30%;
   margin-left: 2%;
-  margin-top: 1%;
+  margin-top: 5%;
   padding-bottom: 3%;
 }
 .roomDataOne {
@@ -91,4 +91,39 @@
 }
 .noError {
   border: 1px solid grey;
+}
+/* njkjk */
+.insideAddImagesRoom {
+  height: 100% !important;
+  display: grid;
+  grid-template-rows: 25% 25% 25% 25%;
+}
+.imageHeightRoom {
+  height: 100% !important;
+}
+.imageHeightRoom ::placeholder {
+  color: grey !important;
+}
+.imageHeightRoom input {
+  margin-left: 17%;
+  width: 65%;
+  padding: 2%;
+  padding: 2%;
+  margin-bottom: 1%;
+  margin-top: 2%;
+  border-radius: 12px;
+  border: 1px solid #a2a0a0;
+}
+.imageDivRoom img {
+  width: 70%;
+  margin-top: 2%;
+}
+.imageDivRoom {
+  margin-left: 26%;
+  width: 63% !important;
+  height: 71% !important;
+}
+.AddNewRoom {
+  margin-left: 8%;
+  font-size: 17px;
 }

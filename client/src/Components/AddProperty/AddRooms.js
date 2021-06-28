@@ -3,6 +3,7 @@ import Imagecard from "./addImage3.png";
 import "./AddRooms.css";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 import axios from "axios";
+import AddNewRoom2 from "./AddNewRoom2";
 
 const initialState = {
   availability: 0,
@@ -15,6 +16,11 @@ const initialState = {
   roomDescErr: "",
   roomTypeErr: "",
   numberOfRoomsErr: "",
+  url11: "",
+  url12: "",
+  url13: "",
+  url14: "",
+  addNew: false,
 };
 export class AddRooms extends Component {
   constructor(props) {
@@ -33,6 +39,7 @@ export class AddRooms extends Component {
       roomType: e.target.value,
       roomTypeErr: "",
     });
+    console.log("Value of roomType = ", this.state.roomType);
   };
   handleRoomPrice = (e) => {
     this.setState({
@@ -60,12 +67,14 @@ export class AddRooms extends Component {
     let numberOfRoomsErr = "";
     if (!this.state.availability) {
       availabilityErr = "Enter Total Rooms";
+      console.log("availability = ", availabilityErr);
     }
     if (availabilityErr) {
       this.setState({ availabilityErr });
     }
     if (this.state.roomDesc == "") {
       roomDescErr = "Enter Address";
+      console.log("roomDescErr = ", roomDescErr);
     }
     if (roomDescErr) {
       this.setState({ roomDescErr });
@@ -73,17 +82,20 @@ export class AddRooms extends Component {
     }
     if (!this.state.numberOfRooms) {
       numberOfRoomsErr = "Enter Total Rooms";
+      console.log("numberOfRoomsErr = ", numberOfRoomsErr);
     }
     if (numberOfRoomsErr) {
       this.setState({ numberOfRoomsErr });
-    }
-    if (!this.state.roomType) {
-      roomTypeErr = "Enter Location";
-    }
-    if (roomTypeErr) {
-      this.setState({ roomTypeErr });
       return false;
     }
+    // if (!this.state.roomType) {
+    //   roomTypeErr = "Enter Location";
+    //   console.log("roomTypeErr = ", roomTypeErr);
+    // }
+    // if (roomTypeErr) {
+    //   this.setState({ roomTypeErr });
+    //   return false;
+    // }
     return true;
   };
   handleSubmit = (event) => {
@@ -122,6 +134,36 @@ export class AddRooms extends Component {
     });
     console.log("imge func room = ", e.target.files);
   };
+  handleUrl11 = (e) => {
+    this.setState({
+      url11: e.target.value,
+      // hotelNameErr: "",
+    });
+  };
+  handleUrl12 = (e) => {
+    this.setState({
+      url12: e.target.value,
+      // hotelNameErr: "",
+    });
+  };
+  handleUrl13 = (e) => {
+    this.setState({
+      url13: e.target.value,
+      // hotelNameErr: "",
+    });
+  };
+  handleUrl14 = (e) => {
+    this.setState({
+      url14: e.target.value,
+      // hotelNameErr: "",
+    });
+  };
+  handleAddNewRoom = (e) => {
+    this.setState({
+      addNew: !this.state.addNew,
+    });
+    console.log("addnew = ", this.state.addNew);
+  };
   render() {
     return (
       <div>
@@ -135,31 +177,74 @@ export class AddRooms extends Component {
                 <div className="roomDivide">
                   <div className="roomImage">
                     <div className="setroomImage">
-                      <input
-                        type="file"
-                        name="image-uploadRoom"
-                        id="inputRoom"
-                        accept="image/*"
-                        multiple="true"
-                        onChange={this.handleRoomImage}
-                      ></input>
-                      <div className="labelRoom" id="chooseroom">
-                        <label htmlFor="inputRoom" className="image-uploadRoom">
-                          <AddPhotoAlternateIcon /> Choose Images
-                        </label>
-                      </div>
-                      <div className="imageDivRoom">
-                        <img
-                          src={this.state.roomImage}
-                          className="imageRoom"
-                        ></img>
+                      <div className="insideAddImagesRoom">
+                        <div className="imageHeightRoom">
+                          {/* <input placeholder="dummy"></input> */}
+                          <input
+                            type="url"
+                            name="url11"
+                            placeholder="Add Image URL"
+                            value={this.state.url11}
+                            onChange={this.handleUrl11}
+                          ></input>
+                          <div className="imageDivRoom">
+                            <img
+                              src={this.state.url11}
+                              // alt="Add Image Url"
+                            ></img>
+                          </div>
+                        </div>
+                        <div className="imageHeightRoom">
+                          {/* Image URL */}
+                          <input
+                            type="url"
+                            name="url12"
+                            value={this.state.url12}
+                            placeholder="Add Image URL"
+                            onChange={this.handleUrl12}
+                          ></input>
+                          <div className="imageDivRoom">
+                            <img src={this.state.url12}></img>
+                          </div>
+                        </div>
+                        <div className="imageHeightRoom">
+                          <input
+                            type="url"
+                            name="url13"
+                            value={this.state.url13}
+                            placeholder="Add Image URL"
+                            onChange={this.handleUrl13}
+                          ></input>
+                          <div className="imageDivRoom">
+                            <img src={this.state.url13}></img>
+                          </div>
+                        </div>
+                        <div className="imageHeightRoom">
+                          {/* Image URL */}
+                          <input
+                            type="url"
+                            name="url14"
+                            value={this.state.url14}
+                            placeholder="Add Image URL"
+                            onChange={this.handleUrl14}
+                          ></input>
+                          <div className="imageDivRoom">
+                            <img src={this.state.url14}></img>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div className="roomDataOne">
                     <div className="roomData">
-                      <label for="cars"></label>
-                      <select name="roomType">
+                      <label htmlFor="option">
+                        {/* value : {this.state.roomType} */}
+                      </label>
+                      <select
+                        id="option"
+                        value={this.state.roomType}
+                        onChange={this.handleRoomType}
+                      >
                         <option value="AC">AC</option>
                         <option value="Non-AC">Non-AC</option>
                         <option value="Delux">Delux</option>
@@ -219,12 +304,24 @@ export class AddRooms extends Component {
                     <div className="submit">
                       <button onClick={this.handleSubmit}>Submit</button>
                     </div>
+                    <div className="AddNewRoom">
+                      {/* <button onClick={<AddRooms />}>Add New</button> */}
+                      <label>
+                        Do you wish to add another room type?
+                        <input
+                          type="checkbox"
+                          checked={this.state.addNew}
+                          onChange={this.handleAddNewRoom}
+                        ></input>
+                      </label>
+                    </div>
                   </div>
                 </div>
               </form>
             </div>
           </div>
         </div>
+        {this.state.addNew ? <AddNewRoom2 /> : null}
       </div>
     );
   }
