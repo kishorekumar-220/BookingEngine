@@ -4,7 +4,8 @@ import "./AddRooms.css";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 import axios from "axios";
 import AddNewRoom2 from "./AddNewRoom2";
-
+import { connect } from "react-redux";
+import { withRouter, Link } from "react-router-dom";
 const initialState = {
   availability: 0,
   roomDesc: "",
@@ -21,6 +22,10 @@ const initialState = {
   url13: "",
   url14: "",
   addNew: false,
+  price1: 0,
+  price2: 0,
+  price1Err: "",
+  price2Err: "",
 };
 export class AddRooms extends Component {
   constructor(props) {
@@ -40,11 +45,22 @@ export class AddRooms extends Component {
       roomTypeErr: "",
     });
     console.log("Value of roomType = ", this.state.roomType);
+    console.log("this.props.propertyList", this.props.propertyList);
+    console.log(
+      "this.props.propertyList length = ",
+      this.props.propertyList.length + 1
+    );
   };
   handleRoomPrice = (e) => {
     this.setState({
-      // roomType: e.target.value,
-      // roomTypeErr: "",
+      price2: e.target.value,
+      price2Err: "",
+    });
+  };
+  handleRoomPriceFood = (e) => {
+    this.setState({
+      price1: e.target.value,
+      price1Err: "",
     });
   };
   handleAvailable = (e) => {
@@ -65,6 +81,22 @@ export class AddRooms extends Component {
     let roomDescErr = "";
     let roomTypeErr = "";
     let numberOfRoomsErr = "";
+    let price1Err = "";
+    let price2Err = "";
+    if (!this.state.price1) {
+      availabilityErr = "Enter price with food";
+      console.log("price1 = ", price1Err);
+    }
+    if (price1Err) {
+      this.setState({ price1Err });
+    }
+    if (!this.state.price2) {
+      availabilityErr = "Enter price without food";
+      console.log("price2Err = ", price2Err);
+    }
+    if (price2Err) {
+      this.setState({ price2Err });
+    }
     if (!this.state.availability) {
       availabilityErr = "Enter Total Rooms";
       console.log("availability = ", availabilityErr);
@@ -103,7 +135,7 @@ export class AddRooms extends Component {
     const isValid = this.isValidForm();
     if (isValid) {
       const roomData = {
-        PropertyId: 22,
+        PropertyId: this.props.propertyList.length,
         roomType: this.state.roomType,
         roomImage: this.state.roomImage,
         description: this.state.roomDesc,
@@ -237,8 +269,7 @@ export class AddRooms extends Component {
                   </div>
                   <div className="roomDataOne">
                     <div className="roomData">
-                      <label htmlFor="option">
-                        {/* value : {this.state.roomType} */}
+                      {/* <label htmlFor="option">
                       </label>
                       <select
                         id="option"
@@ -249,8 +280,8 @@ export class AddRooms extends Component {
                         <option value="Non-AC">Non-AC</option>
                         <option value="Delux">Delux</option>
                         <option value="Junior Suit">Junior Suit</option>
-                      </select>
-                      {/* <input
+                      </select> */}
+                      <input
                         name="roomType"
                         type="text"
                         onChange={this.handleRoomType}
@@ -258,12 +289,19 @@ export class AddRooms extends Component {
                         className={`${
                           this.state.roomTypeErr !== "" ? "inputError" : ""
                         }`}
-                      ></input> */}
+                      ></input>
                       <input
-                        name="price"
+                        name="price1"
+                        type="text"
+                        onChange={this.handleRoomPriceFood}
+                        placeholder=" Price with Food "
+                        required
+                      ></input>
+                      <input
+                        name="price2"
                         type="text"
                         onChange={this.handleRoomPrice}
-                        placeholder="RoomPrice"
+                        placeholder=" Price without Food "
                         required
                       ></input>
                       <input
@@ -326,5 +364,17 @@ export class AddRooms extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    propertyList: state.propertyList,
+    dateRange: state.dateRange,
+    roomVal: state.roomVal,
+    adultVal: state.adultVal,
+    childVal: state.childVal,
+    propertyEmptyList: state.propertyEmptyList,
+  };
+};
 
-export default AddRooms;
+export default connect(mapStateToProps, null)(withRouter(AddRooms));
+
+// export default ;

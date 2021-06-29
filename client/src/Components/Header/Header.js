@@ -6,7 +6,11 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { CgClose } from "react-icons/cg";
 import "./Header.css";
 import icon from "./logo2.png";
-export class Header extends Component {
+import { connect } from "react-redux";
+import { withRouter, Link } from "react-router-dom";
+import { get } from "lodash";
+
+class Header extends Component {
   constructor(props) {
     super(props);
 
@@ -38,9 +42,9 @@ export class Header extends Component {
             <Menu.Item position="right" as={NavLink} to="/aboutUs">
               <p className="About">About Us</p>
             </Menu.Item>
-            {/* <Menu.Item position="right" as={NavLink} to="/accommodation">
-              Accomodation
-            </Menu.Item> */}
+            <Menu.Item position="right" as={NavLink} to="/AddProperty">
+              Add Property
+            </Menu.Item>
             {/* <Menu.Item position="right">
               <Button as={NavLink} to="/booknow">
                 Book Now
@@ -58,5 +62,15 @@ export class Header extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    propertyList: state.propertyList,
+    dateRange: get(state, "dateRange", []),
+    roomVal: state.roomVal,
+    adultVal: state.adultVal,
+    childVal: state.childVal,
+    propertyEmptyList: get(state, "propertyEmptyList", []),
+  };
+};
 
-export default Header;
+export default connect(mapStateToProps, null)(withRouter(Header));

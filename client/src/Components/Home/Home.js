@@ -509,6 +509,16 @@ class Home extends React.Component {
                   </Button.Content>
                 </Button>
               </div>
+              {/* <div>
+                <Link
+                  to={{
+                    pathname: `/AddProperty`,
+                    // props: { hotelName: get(data, "name", "--") },
+                  }}
+                >
+                  <button>Add Property</button>
+                </Link>
+              </div> */}
             </div>
           </div>
         </div>
