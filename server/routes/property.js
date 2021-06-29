@@ -71,6 +71,18 @@ router.post("/addProperty", async (req, res) => {
         wifi: req.body.wifi,
         breakfast: req.body.breakfast,
         sanitized: req.body.sanitized,
+        gym: req.body.gym,
+        pool: req.body.pool,
+        laundry: req.body.laundry,
+        beverages: req.body.beverages,
+        pets: req.body.pets,
+        parking: req.body.parking,
+        url1: req.body.url1,
+        url2: req.body.url2,
+        url3: req.body.url3,
+        url4: req.body.url4,
+        WAcontact: req.body.WAcontact,
+        city: req.body.city
       });
       newProperty.save(function (err, Person) {
         if (err) res.status("400").send(err);
@@ -98,6 +110,18 @@ router.post("/addProperty", async (req, res) => {
             wifi: req.body.wifi,
             breakfast: req.body.breakfast,
             sanitized: req.body.sanitized,
+            gym: req.body.gym,
+            pool: req.body.pool,
+            laundry: req.body.laundry,
+            beverages: req.body.beverages,
+            pets: req.body.pets,
+            parking: req.body.parking,
+            url1: req.body.url1,
+            url2: req.body.url2,
+            url3: req.body.url3,
+            url4: req.body.url4,
+            WAcontact: req.body.WAcontact,
+            city: req.body.city
           });
 
           newProperty.save(function (err, Person) {
@@ -153,7 +177,7 @@ router.get("/Property/:location", async (req, res) => {
     if (post.length === 0) {
       //res.status(404).send("Hotels for location " + req.params.location + " not found")
       let partialToMatch = new RegExp(req.params.location, "i");
-      propertyMaster.find({ name_: partialToMatch }, function (err, found) {
+      propertyMaster.find({ name: partialToMatch }, function (err, found) {
         if (found) {
           res.send(found);
         }

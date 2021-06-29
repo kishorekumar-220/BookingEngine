@@ -40,6 +40,7 @@ const defaultState = {
   laundry: false,
   beverages: false,
   pets: false,
+  parking: false,
 };
 class AddProperty extends Component {
   constructor(props) {
