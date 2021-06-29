@@ -21,6 +21,8 @@ const initialState = {
   url12: "",
   url13: "",
   url14: "",
+  url11Err: "",
+
   addNew: false,
   price1: 0,
   price2: 0,
@@ -83,15 +85,23 @@ export class AddRooms extends Component {
     let numberOfRoomsErr = "";
     let price1Err = "";
     let price2Err = "";
+    let url11Err = "";
+    if (!this.state.url11) {
+      url11Err = "Enter price with food";
+      console.log("url11Err = ", url11Err);
+    }
+    if (url11Err) {
+      this.setState({ url11Err });
+    }
     if (!this.state.price1) {
-      availabilityErr = "Enter price with food";
+      price1Err = "Enter price with food";
       console.log("price1 = ", price1Err);
     }
     if (price1Err) {
       this.setState({ price1Err });
     }
     if (!this.state.price2) {
-      availabilityErr = "Enter price without food";
+      price2Err = "Enter price without food";
       console.log("price2Err = ", price2Err);
     }
     if (price2Err) {
@@ -110,6 +120,14 @@ export class AddRooms extends Component {
     }
     if (roomDescErr) {
       this.setState({ roomDescErr });
+      // return false;
+    }
+    if (this.state.roomType == "") {
+      roomTypeErr = "Enter Address";
+      console.log("roomDescErr = ", roomTypeErr);
+    }
+    if (roomTypeErr) {
+      this.setState({ roomTypeErr });
       // return false;
     }
     if (!this.state.numberOfRooms) {
@@ -137,13 +155,20 @@ export class AddRooms extends Component {
       const roomData = {
         PropertyId: this.props.propertyList.length,
         roomType: this.state.roomType,
-        roomImage: this.state.roomImage,
+        roomImage: this.state.url11,
         description: this.state.roomDesc,
         numberofRooms: this.state.numberOfRooms,
         availability: this.state.availability,
         _v: 0,
       };
+      const priceData = {
+        // AP: this.state.price1,
+        // EP: this.state.price2,
+        perDayRate: [this.state.price1, this.state.price2],
+        plan: ["AP", "EP"],
+      };
       console.log("this.state = ", roomData);
+      console.log("priceData = ", priceData);
 
       axios
         .post("http://localhost:5000/rooms/addRoomType", roomData)
@@ -152,6 +177,14 @@ export class AddRooms extends Component {
         })
         .catch((error) => {
           console.log("Response from room = ", error);
+        });
+      axios
+        .post("http://localhost:5000/rate/rate", priceData)
+        .then((res) => {
+          console.log("Response from price = ", res);
+        })
+        .catch((error) => {
+          console.log("Response from price = ", error);
         });
     }
   };
@@ -171,25 +204,23 @@ export class AddRooms extends Component {
       url11: e.target.value,
       // hotelNameErr: "",
     });
+    console.log("url1 - ", this.state.url11);
   };
-  handleUrl12 = (e) => {
-    this.setState({
-      url12: e.target.value,
-      // hotelNameErr: "",
-    });
-  };
-  handleUrl13 = (e) => {
-    this.setState({
-      url13: e.target.value,
-      // hotelNameErr: "",
-    });
-  };
-  handleUrl14 = (e) => {
-    this.setState({
-      url14: e.target.value,
-      // hotelNameErr: "",
-    });
-  };
+  // handleUrl12 = (e) => {
+  //   this.setState({
+  //     url12: e.target.value,
+  //   });
+  // };
+  // handleUrl13 = (e) => {
+  //   this.setState({
+  //     url13: e.target.value,
+  //   });
+  // };
+  // handleUrl14 = (e) => {
+  //   this.setState({
+  //     url14: e.target.value,
+  //   });
+  // };
   handleAddNewRoom = (e) => {
     this.setState({
       addNew: !this.state.addNew,
@@ -218,6 +249,11 @@ export class AddRooms extends Component {
                             placeholder="Add Image URL"
                             value={this.state.url11}
                             onChange={this.handleUrl11}
+                            className={`${
+                              this.state.numberOfRoomsErr !== ""
+                                ? "inputError"
+                                : ""
+                            }`}
                           ></input>
                           <div className="imageDivRoom">
                             <img
@@ -228,7 +264,7 @@ export class AddRooms extends Component {
                         </div>
                         <div className="imageHeightRoom">
                           {/* Image URL */}
-                          <input
+                          {/* <input
                             type="url"
                             name="url12"
                             value={this.state.url12}
@@ -237,10 +273,10 @@ export class AddRooms extends Component {
                           ></input>
                           <div className="imageDivRoom">
                             <img src={this.state.url12}></img>
-                          </div>
+                          </div> */}
                         </div>
                         <div className="imageHeightRoom">
-                          <input
+                          {/* <input
                             type="url"
                             name="url13"
                             value={this.state.url13}
@@ -249,11 +285,11 @@ export class AddRooms extends Component {
                           ></input>
                           <div className="imageDivRoom">
                             <img src={this.state.url13}></img>
-                          </div>
+                          </div> */}
                         </div>
                         <div className="imageHeightRoom">
                           {/* Image URL */}
-                          <input
+                          {/* <input
                             type="url"
                             name="url14"
                             value={this.state.url14}
@@ -262,7 +298,7 @@ export class AddRooms extends Component {
                           ></input>
                           <div className="imageDivRoom">
                             <img src={this.state.url14}></img>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </div>
@@ -295,6 +331,9 @@ export class AddRooms extends Component {
                         type="text"
                         onChange={this.handleRoomPriceFood}
                         placeholder=" Price with Food "
+                        className={`${
+                          this.state.price1Err !== "" ? "inputError" : ""
+                        }`}
                         required
                       ></input>
                       <input
@@ -302,6 +341,9 @@ export class AddRooms extends Component {
                         type="text"
                         onChange={this.handleRoomPrice}
                         placeholder=" Price without Food "
+                        className={`${
+                          this.state.price2Err !== "" ? "inputError" : ""
+                        }`}
                         required
                       ></input>
                       <input
@@ -332,12 +374,6 @@ export class AddRooms extends Component {
                           this.state.roomDescErr !== "" ? "inputError" : ""
                         }`}
                       ></textarea>
-                      <input
-                        name="food"
-                        type="text"
-                        onChange={this.handleRoomChange}
-                        placeholder="FoodOption"
-                      ></input>
                     </div>
                     <div className="submit">
                       <button onClick={this.handleSubmit}>Submit</button>

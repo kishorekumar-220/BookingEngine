@@ -24,7 +24,11 @@ const defaultState = {
   url1: "",
   url2: "",
   url3: "",
-  url4: "",
+  url1Err: "",
+  url2Err: "",
+  url3Err: "",
+
+  // url4: "",
   locationErr: "",
   hotelNameErr: "",
   addressErr: "",
@@ -32,6 +36,7 @@ const defaultState = {
   decsErr: "",
   ratingErr: "",
   contactError: "",
+  websiteErr: "",
   wifi: false,
   breakfast: false,
   sanitized: false,
@@ -57,12 +62,23 @@ class AddProperty extends Component {
     let contactError = "";
     let locationErr = "";
     let WAcontactError = "";
+    let websiteErr = "";
+    let url1Err = "";
+    let url2Err = "";
+    let url3Err = "";
+
     // let PropertyIdErr = "";
     if (!this.state.location) {
       locationErr = "Enter Location";
     }
     if (locationErr) {
       this.setState({ locationErr });
+    }
+    if (!this.state.website) {
+      websiteErr = "Enter web";
+    }
+    if (websiteErr) {
+      this.setState({ websiteErr });
     }
     // if (!this.state.PropertyId) {
     //   PropertyIdErr = "Enter Property ID";
@@ -111,6 +127,27 @@ class AddProperty extends Component {
       this.setState({ contactError });
       // return false;
     }
+    if (!this.state.url1) {
+      url1Err = "Enter image ADd";
+    }
+    if (url1Err) {
+      this.setState({ url1Err });
+      // return false;
+    }
+    if (!this.state.url2) {
+      url2Err = "Enter image ADd";
+    }
+    if (url2Err) {
+      this.setState({ url2Err });
+      // return false;
+    }
+    if (!this.state.url3) {
+      url3Err = "Enter image ADd";
+    }
+    if (url3Err) {
+      this.setState({ url3Err });
+      // return false;
+    }
     if (!this.state.WAcontact) {
       WAcontactError = "Enter contact";
     }
@@ -129,11 +166,29 @@ class AddProperty extends Component {
     if (isValid) {
       const data = {
         name: this.state.name,
-        Address: this.state.address,
+        name_: this.state.name,
+        Image: this.state.Imagecard,
         location: this.state.city,
         description: this.state.description,
         ratings: this.state.ratings,
+        website: this.state.website,
         contact: this.state.contact,
+        Address: this.state.address,
+        wifi: this.state.wifi,
+        breakfast: this.state.breakfast,
+        sanitized: this.state.sanitized,
+        gym: this.state.gym,
+        pool: this.state.pool,
+        laundry: this.state.laundry,
+        beverages: this.state.beverages,
+        pets: this.state.pets,
+        parking: this.state.parking,
+        url1: this.state.url1,
+        url2: this.state.url2,
+        url3: this.state.url3,
+        url4: this.state.url3,
+        WAcontact: this.state.WAcontact,
+        city: this.state.city,
       };
       axios
         .post("http://localhost:5000/property/addProperty", data)
@@ -236,10 +291,15 @@ class AddProperty extends Component {
       // hotelNameErr: "",
     });
   };
-  handleUrl4 = (e) => {
+  // handleUrl4 = (e) => {
+  //   this.setState({
+  //     url4: e.target.value,
+  //   });
+  // };
+  handleWebsite = (e) => {
     this.setState({
-      url4: e.target.value,
-      // hotelNameErr: "",
+      website: e.target.value,
+      websiteErr: "",
     });
   };
   handleHotelName = (e) => {
@@ -338,6 +398,9 @@ class AddProperty extends Component {
                       placeholder="Add Image URL"
                       value={this.state.url1}
                       onChange={this.handleUrl1}
+                      className={`${
+                        this.state.url1Err !== "" ? "inputError" : "noError"
+                      }`}
                     ></input>
                     <div className="imageDiv">
                       <img
@@ -355,6 +418,9 @@ class AddProperty extends Component {
                       value={this.state.url2}
                       placeholder="Add Image URL"
                       onChange={this.handleUrl2}
+                      className={`${
+                        this.state.url2Err !== "" ? "inputError" : "noError"
+                      }`}
                     ></input>
                     <div className="imageDiv">
                       <img src={this.state.url2} className="image"></img>
@@ -368,22 +434,12 @@ class AddProperty extends Component {
                       value={this.state.url3}
                       placeholder="Add Image URL"
                       onChange={this.handleUrl3}
+                      className={`${
+                        this.state.url3Err !== "" ? "inputError" : "noError"
+                      }`}
                     ></input>
                     <div className="imageDiv">
                       <img src={this.state.url3} className="image"></img>
-                    </div>
-                  </div>
-                  <div className="imageHeight">
-                    {/* Image URL */}
-                    <input
-                      type="url"
-                      name="url4"
-                      value={this.state.url4}
-                      placeholder="Add Image URL"
-                      onChange={this.handleUrl4}
-                    ></input>
-                    <div className="imageDiv">
-                      <img src={this.state.url4} className="image"></img>
                     </div>
                   </div>
                 </div>
@@ -453,6 +509,15 @@ class AddProperty extends Component {
                         this.state.decsErr !== "" ? "inputError" : ""
                       }`}
                     ></textarea>
+                    <input
+                      name="website"
+                      required
+                      placeholder="Property Website"
+                      onChange={this.handleWebsite}
+                      className={`${
+                        this.state.websiteErr !== "" ? "inputError" : ""
+                      }`}
+                    ></input>
                   </div>
                   <div className="ratingAndContact">
                     <label htmlFor="option">

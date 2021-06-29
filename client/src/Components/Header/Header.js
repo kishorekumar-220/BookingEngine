@@ -42,7 +42,12 @@ class Header extends Component {
             <Menu.Item position="right" as={NavLink} to="/aboutUs">
               <p className="About">About Us</p>
             </Menu.Item>
-            <Menu.Item position="right" as={NavLink} to="/AddProperty">
+            <Menu.Item
+              position="right"
+              id="addProperty"
+              as={NavLink}
+              to="/AddProperty"
+            >
               Add Property
             </Menu.Item>
             {/* <Menu.Item position="right">
