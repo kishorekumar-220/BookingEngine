@@ -35,7 +35,7 @@
   /* width: 30%; */
   width: 30%;
   margin-left: 2%;
-  margin-top: 5%;
+  margin-top: 4.5%;
   padding-bottom: 3%;
 }
 .roomDataOne {
@@ -96,7 +96,7 @@
 .insideAddImagesRoom {
   height: 100% !important;
   display: grid;
-  grid-template-rows: 25% 25% 25% 25%;
+  grid-template-rows: 50% 50%;
 }
 .imageHeightRoom {
   height: 100% !important;
@@ -110,7 +110,7 @@
   padding: 2%;
   padding: 2%;
   margin-bottom: 1%;
-  margin-top: 2%;
+  margin-top: 0%;
   border-radius: 12px;
   border: 1px solid #a2a0a0;
 }
@@ -126,4 +126,45 @@
 .AddNewRoom {
   margin-left: 8%;
   font-size: 17px;
+}
+.addPriceDiv {
+  margin-left: 8%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.addPriceDiv button {
+  padding: 1.5% 2.3%;
+  font-size: 16px;
+  background: #80050c;
+  color: white;
+  border: none;
+}
+.foodPriceData,
+.dateData {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin-left: 8%;
+}
+.foodPriceData input,
+.dateData input {
+  padding: 2%;
+  margin-bottom: 1%;
+  margin-top: 2%;
+  border-radius: 12px;
+  border: 1px solid #a2a0a0;
+}
+.foodPriceData .e-input-group {
+  width: 19%;
+  margin-top: 2%;
+  margin-left: 0%;
+  background: white !important;
+  border: 1px solid grey !important;
+  border-radius: 12px !important;
+}
+#priceTwo,
+#priceOne {
+  margin-left: 10%;
 }

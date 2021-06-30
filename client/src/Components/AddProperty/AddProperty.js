@@ -6,52 +6,50 @@ import AddRooms from "./AddRooms";
 import axios from "axios";
 // import e from "express";
 
-const defaultState = {
-  Image: Imagecard,
-  // PropertyId: "",
-  // PropertyIdErr: "",
-  name_: "",
-  name: "",
-  city: "",
-  description: "",
-  contact: "",
-  address: "",
-  ratings: "",
-  website: "",
-  location: "",
-  WAcontact: "",
-  WAcontactError: "",
-  url1: "",
-  url2: "",
-  url3: "",
-  url1Err: "",
-  url2Err: "",
-  url3Err: "",
-
-  // url4: "",
-  locationErr: "",
-  hotelNameErr: "",
-  addressErr: "",
-  cityErr: "",
-  decsErr: "",
-  ratingErr: "",
-  contactError: "",
-  websiteErr: "",
-  wifi: false,
-  breakfast: false,
-  sanitized: false,
-  gym: false,
-  pool: false,
-  laundry: false,
-  beverages: false,
-  pets: false,
-  parking: false,
-};
 class AddProperty extends Component {
   constructor(props) {
     super(props);
 
-    this.state = defaultState;
+    this.state = {
+      Image: Imagecard,
+
+      name_: "",
+      name: "",
+      city: "",
+      description: "",
+      contact: "",
+      address: "",
+      ratings: "",
+      website: "",
+      location: "",
+      WAcontact: "",
+      WAcontactError: "",
+      url1: "",
+      url2: "",
+      url3: "",
+      url1Err: "",
+      url2Err: "",
+      url3Err: "",
+
+      // url4: "",
+      locationErr: "",
+      hotelNameErr: "",
+      addressErr: "",
+      cityErr: "",
+      decsErr: "",
+      ratingErr: "",
+      contactError: "",
+      websiteErr: "",
+      wifi: false,
+      breakfast: false,
+      sanitized: false,
+      gym: false,
+      pool: false,
+      laundry: false,
+      beverages: false,
+      pets: false,
+      parking: false,
+    };
   }
   submitValidation = () => {
     let hotelNameErr = "";
@@ -199,7 +197,7 @@ class AddProperty extends Component {
           console.log("error = ", error);
         });
       console.log("this.state = ", data);
-      this.setState({ defaultState });
+      // this.setState({ defaultState });
     }
   };
   handleLocation = (e) => {
@@ -276,20 +274,21 @@ class AddProperty extends Component {
   handleUrl1 = (e) => {
     this.setState({
       url1: e.target.value,
-      // hotelNameErr: "",
     });
+
+    console.log("image 1 = ", this.state.url1);
   };
   handleUrl2 = (e) => {
     this.setState({
       url2: e.target.value,
-      // hotelNameErr: "",
     });
+    console.log("image 2 = ", this.state.url2);
   };
   handleUrl3 = (e) => {
     this.setState({
       url3: e.target.value,
-      // hotelNameErr: "",
     });
+    console.log("image 3 = ", this.state.url3);
   };
   // handleUrl4 = (e) => {
   //   this.setState({

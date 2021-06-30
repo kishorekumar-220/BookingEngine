@@ -6,6 +6,7 @@ import axios from "axios";
 import AddNewRoom2 from "./AddNewRoom2";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
+import { DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
 const initialState = {
   availability: 0,
   roomDesc: "",
@@ -22,7 +23,7 @@ const initialState = {
   url13: "",
   url14: "",
   url11Err: "",
-
+  url12Err: "",
   addNew: false,
   price1: 0,
   price2: 0,
@@ -60,6 +61,7 @@ export class AddRooms extends Component {
     });
   };
   handleRoomPriceFood = (e) => {
+    console.log("this.props.rooomDetailsList = ", this.props.roomDetailsList);
     this.setState({
       price1: e.target.value,
       price1Err: "",
@@ -83,9 +85,10 @@ export class AddRooms extends Component {
     let roomDescErr = "";
     let roomTypeErr = "";
     let numberOfRoomsErr = "";
-    let price1Err = "";
-    let price2Err = "";
+
     let url11Err = "";
+    let url12Err = "";
+
     if (!this.state.url11) {
       url11Err = "Enter price with food";
       console.log("url11Err = ", url11Err);
@@ -93,20 +96,14 @@ export class AddRooms extends Component {
     if (url11Err) {
       this.setState({ url11Err });
     }
-    if (!this.state.price1) {
-      price1Err = "Enter price with food";
-      console.log("price1 = ", price1Err);
+    if (!this.state.url12) {
+      url12Err = "Enter price with food";
+      console.log("url11Err = ", url12Err);
     }
-    if (price1Err) {
-      this.setState({ price1Err });
+    if (url12Err) {
+      this.setState({ url12Err });
     }
-    if (!this.state.price2) {
-      price2Err = "Enter price without food";
-      console.log("price2Err = ", price2Err);
-    }
-    if (price2Err) {
-      this.setState({ price2Err });
-    }
+
     if (!this.state.availability) {
       availabilityErr = "Enter Total Rooms";
       console.log("availability = ", availabilityErr);
@@ -161,14 +158,8 @@ export class AddRooms extends Component {
         availability: this.state.availability,
         _v: 0,
       };
-      const priceData = {
-        // AP: this.state.price1,
-        // EP: this.state.price2,
-        perDayRate: [this.state.price1, this.state.price2],
-        plan: ["AP", "EP"],
-      };
+
       console.log("this.state = ", roomData);
-      console.log("priceData = ", priceData);
 
       axios
         .post("http://localhost:5000/rooms/addRoomType", roomData)
@@ -178,6 +169,42 @@ export class AddRooms extends Component {
         .catch((error) => {
           console.log("Response from room = ", error);
         });
+    }
+  };
+  isValidPrice = () => {
+    let price1Err = "";
+    let price2Err = "";
+
+    if (!this.state.price1) {
+      price1Err = "Enter price with food";
+      console.log("price1 = ", price1Err);
+    }
+    if (price1Err) {
+      this.setState({ price1Err });
+    }
+    if (!this.state.price2) {
+      price2Err = "Enter price without food";
+      console.log("price2Err = ", price2Err);
+    }
+    if (price2Err) {
+      this.setState({ price2Err });
+      return false;
+    }
+    return true;
+  };
+  handleAddPrice = (event) => {
+    event.preventDefault();
+    const isValidPrice = this.isValidPrice();
+    if (isValidPrice) {
+      const priceData = {
+        roomTypeId: "60db57735ec7be06b0886db6",
+        roomType: this.state.roomType,
+        fromDate: "2021-06-30T05:49:20.710Z",
+        toDate: "2022-06-30T05:49:20.710Z",
+        perDayRate: [this.state.price1, this.state.price2],
+        plan: ["AP", "EP"],
+      };
+      console.log("priceData = ", priceData);
       axios
         .post("http://localhost:5000/rate/rate", priceData)
         .then((res) => {
@@ -206,11 +233,11 @@ export class AddRooms extends Component {
     });
     console.log("url1 - ", this.state.url11);
   };
-  // handleUrl12 = (e) => {
-  //   this.setState({
-  //     url12: e.target.value,
-  //   });
-  // };
+  handleUrl12 = (e) => {
+    this.setState({
+      url12: e.target.value,
+    });
+  };
   // handleUrl13 = (e) => {
   //   this.setState({
   //     url13: e.target.value,
@@ -228,6 +255,11 @@ export class AddRooms extends Component {
     console.log("addnew = ", this.state.addNew);
   };
   render() {
+    const minValue = new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate()
+    );
     return (
       <div>
         <div className="sectionTwo">
@@ -250,9 +282,7 @@ export class AddRooms extends Component {
                             value={this.state.url11}
                             onChange={this.handleUrl11}
                             className={`${
-                              this.state.numberOfRoomsErr !== ""
-                                ? "inputError"
-                                : ""
+                              this.state.url11Err !== "" ? "inputError" : ""
                             }`}
                           ></input>
                           <div className="imageDivRoom">
@@ -264,41 +294,19 @@ export class AddRooms extends Component {
                         </div>
                         <div className="imageHeightRoom">
                           {/* Image URL */}
-                          {/* <input
+                          <input
                             type="url"
                             name="url12"
                             value={this.state.url12}
                             placeholder="Add Image URL"
                             onChange={this.handleUrl12}
+                            className={`${
+                              this.state.url12Err !== "" ? "inputError" : ""
+                            }`}
                           ></input>
                           <div className="imageDivRoom">
                             <img src={this.state.url12}></img>
-                          </div> */}
-                        </div>
-                        <div className="imageHeightRoom">
-                          {/* <input
-                            type="url"
-                            name="url13"
-                            value={this.state.url13}
-                            placeholder="Add Image URL"
-                            onChange={this.handleUrl13}
-                          ></input>
-                          <div className="imageDivRoom">
-                            <img src={this.state.url13}></img>
-                          </div> */}
-                        </div>
-                        <div className="imageHeightRoom">
-                          {/* Image URL */}
-                          {/* <input
-                            type="url"
-                            name="url14"
-                            value={this.state.url14}
-                            placeholder="Add Image URL"
-                            onChange={this.handleUrl14}
-                          ></input>
-                          <div className="imageDivRoom">
-                            <img src={this.state.url14}></img>
-                          </div> */}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -326,26 +334,7 @@ export class AddRooms extends Component {
                           this.state.roomTypeErr !== "" ? "inputError" : ""
                         }`}
                       ></input>
-                      <input
-                        name="price1"
-                        type="text"
-                        onChange={this.handleRoomPriceFood}
-                        placeholder=" Price with Food "
-                        className={`${
-                          this.state.price1Err !== "" ? "inputError" : ""
-                        }`}
-                        required
-                      ></input>
-                      <input
-                        name="price2"
-                        type="text"
-                        onChange={this.handleRoomPrice}
-                        placeholder=" Price without Food "
-                        className={`${
-                          this.state.price2Err !== "" ? "inputError" : ""
-                        }`}
-                        required
-                      ></input>
+
                       <input
                         name="numberOfRooms"
                         type="text"
@@ -376,7 +365,66 @@ export class AddRooms extends Component {
                       ></textarea>
                     </div>
                     <div className="submit">
-                      <button onClick={this.handleSubmit}>Submit</button>
+                      <button onClick={this.handleSubmit}> Next</button>
+                    </div>
+                    <div className="foodPriceData">
+                      <DateRangePickerComponent
+                        placeholder="Check-in/Check-out"
+                        startDate={this.props.dateRange.start}
+                        endDate={this.props.dateRange.end}
+                        min={minValue}
+                        format={"dd-MMM-yy"}
+                        color={"black"}
+                        className="datepicker-input"
+                        onChange={this.handleDateChange}
+                      ></DateRangePickerComponent>
+                      <input
+                        id="priceOne"
+                        name="price1"
+                        type="text"
+                        onChange={this.handleRoomPriceFood}
+                        placeholder=" Price with Food "
+                        className={`${
+                          this.state.price1Err !== "" ? "inputError" : ""
+                        }`}
+                        required
+                      ></input>
+                      <input
+                        id="priceTwo"
+                        name="price2"
+                        type="text"
+                        onChange={this.handleRoomPrice}
+                        placeholder=" Price without Food "
+                        className={`${
+                          this.state.price2Err !== "" ? "inputError" : ""
+                        }`}
+                        required
+                      ></input>
+                    </div>
+                    <div className="dateData">
+                      {/* <input
+                        name="price1"
+                        type="text"
+                        onChange={this.handleRoomPriceFood}
+                        placeholder=" fromdate "
+                        className={`${
+                          this.state.price1Err !== "" ? "inputError" : ""
+                        }`}
+                        required
+                      ></input>
+                      <input
+                        name="price2"
+                        type="text"
+                        onChange={this.handleRoomPrice}
+                        placeholder=" todate"
+                        className={`${
+                          this.state.price2Err !== "" ? "inputError" : ""
+                        }`}
+                        required
+                      ></input> */}
+                    </div>
+                    <div className="addPriceDiv">
+                      <button onClick={this.handleAddPrice}>Add Price</button>
                     </div>
                     <div className="AddNewRoom">
                       {/* <button onClick={<AddRooms />}>Add New</button> */}
@@ -408,6 +456,8 @@ const mapStateToProps = (state) => {
     adultVal: state.adultVal,
     childVal: state.childVal,
     propertyEmptyList: state.propertyEmptyList,
+    // roomDetailsList:state
+    roomDetailsList: state.roomDetailsList,
   };
 };
 

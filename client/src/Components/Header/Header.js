@@ -36,9 +36,7 @@ class Header extends Component {
                 <p className="headline">Booking Engine</p>
               </MenuItem>
             </div>
-            {/* <Menu.Item position="right" as={NavLink} to="/" exact>
-              Home
-            </Menu.Item> */}
+
             <Menu.Item position="right" as={NavLink} to="/aboutUs">
               <p className="About">About Us</p>
             </Menu.Item>
@@ -50,17 +48,6 @@ class Header extends Component {
             >
               Add Property
             </Menu.Item>
-            {/* <Menu.Item position="right">
-              <Button as={NavLink} to="/booknow">
-                Book Now
-              </Button> */}
-            {/* {this.state.clicked ? } */}
-            {/* <GiHamburgerMenu
-                className="hamburger"
-                size="30px"
-                onClick={this.handleClick}
-              /> */}
-            {/* </Menu.Item> */}
           </Menu>
         </Segment>
       </div>
