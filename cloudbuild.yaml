@@ -1,5 +1,5 @@
 steps:
-- id: Docker Build
+  - id: Docker Build
     name: "book-fe"
     args: ["build", "-t", "gcr.io/$PROJECT_ID/budget:$SHORT_SHA", "."]
       
