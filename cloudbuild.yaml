@@ -1,16 +1,8 @@
 steps:
   - id: Docker Build
-    name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "gcr.io/$PROJECT_ID/mail:$SHORT_SHA", "."]
+    name: "Booking_engine"
+    args: ["build", "-t", "book-fe:1.0", "."]
       
   - id: Docker Tag
-    name: 'gcr.io/cloud-builders/docker'
-    args: ['tag', 'gcr.io/$PROJECT_ID/mail:$SHORT_SHA', 'gcr.io/$PROJECT_ID/mail:latest']
-
-  - id: Docker Push version
-    name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/$PROJECT_ID/mail:$SHORT_SHA"]
-      
-  - id: Docker Push latest
-    name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/$PROJECT_ID/mail:latest"]
+    name: 'Booking_engine'
+    args: ['tag', 'book-fe:1.0', 'kishoredocker1220455/book-fe:latest']
