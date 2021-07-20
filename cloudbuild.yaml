@@ -2,7 +2,7 @@ steps:
   - id: Docker Build
     name: "Booking_engine"
     args: ["build", "-t", "book-fe:1.0", "."]
-      
+    
   - id: Docker Tag
     name: 'Booking_engine'
     args: ['tag', 'book-fe:1.0', 'kishoredocker1220455/book-fe:latest']
