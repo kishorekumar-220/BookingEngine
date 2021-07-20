@@ -1,0 +1,12 @@
+steps:
+  - id: Docker Build
+    name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/budget:$SHORT_SHA", "."]
+      
+  - id: Docker Tag
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['tag', 'gcr.io/$PROJECT_ID/budget:$SHORT_SHA', 'gcr.io/$PROJECT_ID/budget:latest']
+    
+  - id: Docker Push latest
+    name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$PROJECT_ID/budget:latest"]
